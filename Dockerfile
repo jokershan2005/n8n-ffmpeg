@@ -13,14 +13,10 @@ RUN apk add --no-cache \
 # Install n8n globally
 RUN npm install -g n8n
 
-# Create n8n user
-RUN addgroup -g 1000 node && \
-    adduser -u 1000 -G node -s /bin/sh -D node
-
 # Set working directory
 WORKDIR /home/node
 
-# Switch to node user
+# Switch to node user (already exists in base image)
 USER node
 
 # Expose n8n port
