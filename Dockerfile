@@ -4,10 +4,11 @@ FROM n8nio/n8n:latest
 # Switch to root to install ffmpeg
 USER root
 
-# Install ffmpeg and dependencies
-RUN apk add --no-cache \
-    ffmpeg \
-    && rm -rf /var/cache/apk/*
+# Install ffmpeg and dependencies (using apt for Debian)
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Switch back to node user for security
 USER node
